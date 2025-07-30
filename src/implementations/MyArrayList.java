@@ -8,6 +8,7 @@ import java.util.Arrays;
 
 public class MyArrayList<E> implements ListADT<E> {
     // === Fields ===
+	private static final long serialVersionUID = 1L;
     private E[] data; // Internal array to store elements
     private int size; // Current number of elements in the list
     private static final int DEFAULT_CAPACITY = 10; // Default starting capacity
@@ -102,13 +103,15 @@ public class MyArrayList<E> implements ListADT<E> {
      * @throws NullPointerException if the provided list is null
      */
     @Override
-    public boolean addAll(ListADT<? extends E> toAdd) throws NullPointerException {
+    public boolean addAll(ListADT<? extends E> toAdd) {
         if (toAdd == null)
             throw new NullPointerException();
+        boolean added = false;
         for (Iterator<? extends E> it = toAdd.iterator(); it.hasNext();) {
             add(it.next());
+            added = true;
         }
-        return true;
+        return added;
     }
 
     /**
